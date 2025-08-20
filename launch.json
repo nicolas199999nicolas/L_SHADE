@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C++ Launch",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/main.exe",
+      //"args": ["1000", "1", "4000", "1", "10"],  // bit run iter rate dim
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": true,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:/MinGW/bin/gdb.exe",  // ← 請改成你實際 GDB 的路徑
+      "preLaunchTask": "Build C++ Project",  // 確保在啟動調試前先編譯
+      "setupCommands": [
+        {
+          "description": "啟用 GDB 的 pretty printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
