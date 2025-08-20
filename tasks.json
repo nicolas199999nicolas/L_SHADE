@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build C++ Project",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-std=c++17",
+                "-I${workspaceFolder}/include",
+                "main.cpp",
+                "algorithm.cpp",
+                "functions.cpp",
+                "cec14_test_func.cpp",
+                "-o",
+                "main.exe"
+            ],
+            "group": "build",
+            "detail": "編譯主要專案檔案",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "echo": true,
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
