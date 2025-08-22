@@ -2,7 +2,7 @@
 #include <vector>
 #include "algorithm.h"
 #include "functions.h"
-#include "cec14_test_func.h"
+//#include "cec14_test_func.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {

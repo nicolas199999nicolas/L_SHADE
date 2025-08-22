@@ -68,7 +68,7 @@ vector<double> differential_evolution(
             vector<int> sortedIdx(NP);
             iota(sortedIdx.begin(), sortedIdx.end(), 0);
             sort(sortedIdx.begin(), sortedIdx.end(), [&](int a, int b){ return fitness[a] < fitness[b]; });//排序
-            NFE+=2;
+            //NFE+=2;
             int num_p = max(2, static_cast<int>(NP * p_i)); // 至少 2 個
             int pBestIdx = sortedIdx[static_cast<int>(rand01(gen) * num_p)];//隨機選一個
 
@@ -128,11 +128,14 @@ vector<double> differential_evolution(
                 fitness[i] = newFitness[i];
             }
         }
+        /*
         // 控制 archive 大小
-        while (Archive.size() > NP) {
+        while (Archive.size() > NP+1) {
+            //cout<<Archive.size() << " > " << NP << ", removing oldest individual from archive." << endl;
             int eraseIdx = static_cast<int>(rand01(gen) * Archive.size());
             Archive.erase(Archive.begin() + eraseIdx);
         }
+            */
         // 更新 MCR, MF (使用 weighted mean)
         if (!S_CR.empty() && !S_F.empty()) {
             // 判斷 max(S_CR) == 0
@@ -165,10 +168,10 @@ vector<double> differential_evolution(
             // 取出最差的 remove_count 個 index，並從大到小排序
             vector<size_t> remove_idx(idx.end() - remove_count, idx.end());
             sort(remove_idx.rbegin(), remove_idx.rend());
-            for (size_t j : remove_idx) {
-                P.erase(P.begin() + j);
-                fitness.erase(fitness.begin() + j);
-            }
+            //for (size_t j : remove_idx) {
+                //P.erase(P.begin());
+                //fitness.erase(fitness.begin());
+            //}
         }
 
     }

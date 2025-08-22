@@ -83,7 +83,7 @@ void cec14_test_func(double *x, double *f, int nx, int mx,int func_num)
 			ini_flag=0;
 		}
 	}
-	/*
+	
 	if (ini_flag==0)
 	{
 		FILE *fpt;
@@ -220,7 +220,7 @@ void cec14_test_func(double *x, double *f, int nx, int mx,int func_num)
 		ini_flag=1;
 		//printf("Function has been initialized!\n");
 	}
-	*/
+	
 
 
 	for (i = 0; i < mx; i++)

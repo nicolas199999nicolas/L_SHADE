@@ -3,10 +3,10 @@
 #include <algorithm>
 #include <random> // 確保使用隨機數生成器
 #include <iostream>
-#include "cec14_test_func.h" // 包含 CEC14 測試函數
+//#include "cec14_test_func.h" // 包含 CEC14 測試函數
 #define M_PI 3.14159265358979323846
 using namespace std;
-
+/*
 // functions.cpp
 double cec14_wrapper(const std::vector<double>& x, int func_num) {
     int nx = x.size();
@@ -15,6 +15,7 @@ double cec14_wrapper(const std::vector<double>& x, int func_num) {
     cec14_test_func(x_copy.data(), &fx, nx, 1, func_num);
     return fx;
 }
+    */
 double ackley(const vector<double>& x) {
     const double a = 20.0, b = 0.2, c = 2 * M_PI;
     int D = x.size();
