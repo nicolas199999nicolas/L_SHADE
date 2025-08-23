@@ -35,17 +35,10 @@ int main(int argc, char *argv[]) {
     const double pb = 0.05; //取前幾%的個體
     const double c = 0.1; //自適應參數
     
-    //函數邊界
-    /*
-    const double minVal = -1.28;
-    const double maxVal = 1.28;
-    */
 
     cout << "Initializing parameters:\n";
     cout << "D: " << D << ", NP: " << NP << ", G: " << G << ", p: " << pb << ", c: " << c << "\n";
 
-    // 呼叫演算法
-    //vector<double> best = differential_evolution(D, NP, G, pb, c, minVal, maxVal, targetFunction);
     
     //指定開頭和結尾函式
     int st = 1  ,ed = 13;
@@ -67,11 +60,7 @@ int main(int argc, char *argv[]) {
         cout<<"F"<<i<<" result:"<<"\n";
         cout << "========================\n";
     }
-    /*// 輸出最佳解
-    cout << "Best solution: ";
-    for (double val : best) cout << val << " ";
-    cout << "\nFitness: " << targetFunction(best) << "\n";
-    */
+    
     system("pause");
     return 0;
 }
