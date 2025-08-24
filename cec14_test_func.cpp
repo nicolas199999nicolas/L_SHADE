@@ -247,7 +247,7 @@ void cec14_test_func(double *x, double *f, int nx, int mx,int func_num)
 			break;
 		case 5:
 			ackley_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			f[i]+=500.0;
+			//f[i]+=500.0;
 			break;
 		case 6:
 			weierstrass_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
