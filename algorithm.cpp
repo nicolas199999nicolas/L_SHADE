@@ -1,22 +1,5 @@
-    return ui;
-}
-// mutation/crossover operator forward declarations
-std::vector<double> mutation_op(
-    const std::vector<double>& xi,
-    const std::vector<double>& xpbest,
-    const std::vector<double>& xr1,
-    const std::vector<double>& xr2,
-    double Fi,
-    double minVal,
-    double maxVal
-);
-std::vector<double> crossover_op(
-    const std::vector<double>& xi,
-    const std::vector<double>& vi,
-    double CRi,
-    std::uniform_real_distribution<>& rand01,
-    std::mt19937& gen
-);
+#include <ctime>
+#include <cstdlib>
 #include "algorithm.h"
 #include "functions.h"
 #include <random>
@@ -24,6 +7,7 @@ std::vector<double> crossover_op(
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include "cec14_test_func.h"
 
 using namespace std;
 vector<double> differential_evolution(
@@ -53,7 +37,7 @@ vector<double> differential_evolution(
     int NFE = 0 ;
     int Ng = NP; // initial Ng = Ninit = NP
     int G = 1; // G=1
-    while (G <= Gmax && NFE < MAX_NFE) {
+    while (/*G <= Gmax &&*/ NFE < MAX_NFE) {
         vector<double> CR(NP), F(NP);
         vector<double> S_CR, S_F, S_delta;
         vector<vector<double>> newP(NP);
@@ -70,7 +54,6 @@ vector<double> differential_evolution(
             } else {
                 CR[i] = min(1.0, max(0.0, randCR(gen)));
             }
-
             // Fi
             cauchy_distribution<> randF(MF[r-1], 0.1);
             double Fi;
@@ -79,69 +62,25 @@ vector<double> differential_evolution(
             } while (Fi <= 0.0);
             if (Fi > 1.0) Fi = 1.0;
             F[i] = Fi;
-
             // p_i uniform [pb, 0.2]
             double pmin = pb;
             double pmax = 0.2;
             double p_i = pmin + (pmax - pmin) * rand01(gen);
 
+            //選擇最佳個體pb和變異個體r1r2
             int pBestIdx, r1;
             vector<double> xr2;
             choose_pbest_and_r1r2(i, NP, D, p_i, fitness, P, Archive, gen, randNP, rand01, pBestIdx, r1, xr2);
 
             // mutation
-            vector<double> vi = mutation_op(P[i], P[pBestIdx], P[r1], xr2, F[i], minVal, maxVal);
-
+            vector<double> vi = mutation(P, F[i], pBestIdx, i, r1, xr2, minVal, maxVal, D);
             // crossover
-            vector<double> ui = crossover_op(P[i], vi, CR[i], rand01, gen);
+            vector<double> ui = crossover(P[i], vi, CR[i], D, gen, rand01);
             newP[i] = ui;
             newFitness[i] = f(ui);
             NFE++;
         }
-    }
-    // 回傳最佳解
-    int bestIdx = min_element(fitness.begin(), fitness.end()) - fitness.begin();
-    return P[bestIdx];
-}
-
-// mutation operator
-vector<double> mutation_op(
-    const vector<double>& xi,
-    const vector<double>& xpbest,
-    const vector<double>& xr1,
-    const vector<double>& xr2,
-    double Fi,
-    double minVal,
-    double maxVal
-) {
-    int D = xi.size();
-    vector<double> vi(D);
-    for (int j = 0; j < D; ++j) {
-        vi[j] = xi[j] + Fi * (xpbest[j] - xi[j]) + Fi * (xr1[j] - xr2[j]);
-        if (vi[j] < minVal) vi[j] = (minVal + xi[j]) / 2;
-        if (vi[j] > maxVal) vi[j] = (maxVal + xi[j]) / 2;
-    }
-    return vi;
-}
-
-// crossover operator
-vector<double> crossover_op(
-    const vector<double>& xi,
-    const vector<double>& vi,
-    double CRi,
-    std::uniform_real_distribution<>& rand01,
-    std::mt19937& gen
-) {
-    int D = xi.size();
-    vector<double> ui(D);
-    int jrand = static_cast<int>(rand01(gen) * D);
-    for (int j = 0; j < D; ++j) {
-        if (rand01(gen) < CRi || j == jrand) ui[j] = vi[j];
-        else ui[j] = xi[j];
-    }
-    return ui;
-}
-        }
+    
         // selection
         for (int i = 0; i < NP; ++i) {
             if (newFitness[i] <= fitness[i]) {
@@ -215,7 +154,8 @@ vector<double> crossover_op(
     int bestIdx = min_element(fitness.begin(), fitness.end()) - fitness.begin();
     return P[bestIdx];
 }
-// mutation
+
+
 void choose_pbest_and_r1r2(
     int i, int NP, int D, double p_i,
     const vector<double>& fitness,
@@ -246,4 +186,25 @@ void choose_pbest_and_r1r2(
     } else {
         xr2 = Archive[xr2_idx - NP];
     }
+}
+// mutation
+vector<double> mutation(const vector<vector<double>>& P, double Fi, int pBestIdx, int i, int r1, const vector<double>& xr2, double minVal, double maxVal, int D) {
+    vector<double> vi(D);
+    for (int j = 0; j < D; ++j) {
+        vi[j] = P[i][j] + Fi * (P[pBestIdx][j] - P[i][j]) + Fi * (P[r1][j] - xr2[j]);
+        if (vi[j] < minVal) vi[j] = (minVal + P[i][j]) / 2;
+        if (vi[j] > maxVal) vi[j] = (maxVal + P[i][j]) / 2;
+    }
+    return vi;
+}
+
+// crossover
+vector<double> crossover(const vector<double>& xi, const vector<double>& vi, double CRi, int D, mt19937& gen, uniform_real_distribution<>& rand01) {
+    vector<double> ui(D);
+    int jrand = static_cast<int>(rand01(gen) * D);
+    for (int j = 0; j < D; ++j) {
+        if (rand01(gen) < CRi || j == jrand) ui[j] = vi[j];
+        else ui[j] = xi[j];
+    }
+    return ui;
 }

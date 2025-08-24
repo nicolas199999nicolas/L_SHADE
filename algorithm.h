@@ -8,7 +8,7 @@ vector<double> differential_evolution(
     int D, int NP, int G, double p, double c, double minVal, double maxVal,
     function<double(const vector<double>&)> func
 );
-void select_pbest_and_parents(
+void choose_pbest_and_r1r2(
     int i, int NP, int D, double p_i,
     const vector<double>& fitness,
     const vector<vector<double>>& P,
@@ -18,3 +18,5 @@ void select_pbest_and_parents(
     uniform_real_distribution<>& rand01,
     int& pBestIdx, int& r1, vector<double>& xr2
 );
+vector<double> mutation(const vector<vector<double>>&, double, int, int, int, const vector<double>&, double, double, int);
+vector<double> crossover(const vector<double>&, const vector<double>&, double, int, mt19937&, uniform_real_distribution<>&);
