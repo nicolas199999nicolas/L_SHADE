@@ -231,123 +231,123 @@ void cec14_test_func(double *x, double *f, int nx, int mx,int func_num)
 		{
 		case 1:	
 			ellips_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=100.0;
+			f[i]+=100.0;
 			break;
 		case 2:	
 			bent_cigar_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=200.0;
+			f[i]+=200.0;
 			break;
 		case 3:	
 			discus_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=300.0;
+			f[i]+=300.0;
 			break;
 		case 4:	
 			rosenbrock_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=400.0;
+			f[i]+=400.0;
 			break;
 		case 5:
 			ackley_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=500.0;
+			f[i]+=500.0;
 			break;
 		case 6:
 			weierstrass_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=600.0;
+			f[i]+=600.0;
 			break;
 		case 7:	
 			griewank_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=700.0;
+			f[i]+=700.0;
 			break;
 		case 8:	
 			rastrigin_func(&x[i*nx],&f[i],nx,OShift,M,1,0);
-			//f[i]+=800.0;
+			f[i]+=800.0;
 			break;
 		case 9:	
 			rastrigin_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=900.0;
+			f[i]+=900.0;
 			break;
 		case 10:	
 			schwefel_func(&x[i*nx],&f[i],nx,OShift,M,1,0);
-			//f[i]+=1000.0;
+			f[i]+=1000.0;
 			break;
 		case 11:	
 			schwefel_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=1100.0;
+			f[i]+=1100.0;
 			break;
 		case 12:	
 			katsuura_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=1200.0;
+			f[i]+=1200.0;
 			break;
 		case 13:	
 			happycat_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=1300.0;
+			f[i]+=1300.0;
 			break;
 		case 14:	
 			hgbat_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=1400.0;
+			f[i]+=1400.0;
 			break;
 		case 15:	
 			grie_rosen_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=1500.0;
+			f[i]+=1500.0;
 			break;
 		case 16:	
 			escaffer6_func(&x[i*nx],&f[i],nx,OShift,M,1,1);
-			//f[i]+=1600.0;
+			f[i]+=1600.0;
 			break;
 		case 17:	
 			hf01(&x[i*nx],&f[i],nx,OShift,M,SS,1,1);
-			//f[i]+=1700.0;
+			f[i]+=1700.0;
 			break;
 		case 18:	
 			hf02(&x[i*nx],&f[i],nx,OShift,M,SS,1,1);
-			//f[i]+=1800.0;
+			f[i]+=1800.0;
 			break;
 		case 19:	
 			hf03(&x[i*nx],&f[i],nx,OShift,M,SS,1,1);
-			//f[i]+=1900.0;
+			f[i]+=1900.0;
 			break;
 		case 20:	
 			hf04(&x[i*nx],&f[i],nx,OShift,M,SS,1,1);
-			//f[i]+=2000.0;
+			f[i]+=2000.0;
 			break;
 		case 21:	
 			hf05(&x[i*nx],&f[i],nx,OShift,M,SS,1,1);
-			//f[i]+=2100.0;
+			f[i]+=2100.0;
 			break;
 		case 22:	
 			hf06(&x[i*nx],&f[i],nx,OShift,M,SS,1,1);
-			//f[i]+=2200.0;
+			f[i]+=2200.0;
 			break;
 		case 23:	
 			cf01(&x[i*nx],&f[i],nx,OShift,M,1);
-			//f[i]+=2300.0;
+			f[i]+=2300.0;
 			break;
 		case 24:	
 			cf02(&x[i*nx],&f[i],nx,OShift,M,1);
-			//f[i]+=2400.0;
+			f[i]+=2400.0;
 			break;
 		case 25:	
 			cf03(&x[i*nx],&f[i],nx,OShift,M,1);
-			//f[i]+=2500.0;
+			f[i]+=2500.0;
 			break;
 		case 26:
 			cf04(&x[i*nx],&f[i],nx,OShift,M,1);
-			//f[i]+=2600.0;
+			f[i]+=2600.0;
 			break;
 		case 27:
 			cf05(&x[i*nx],&f[i],nx,OShift,M,1);
-			//f[i]+=2700.0;
+			f[i]+=2700.0;
 			break;
 		case 28:
 			cf06(&x[i*nx],&f[i],nx,OShift,M,1);
-			//f[i]+=2800.0;
+			f[i]+=2800.0;
 			break;
 		case 29:
 			cf07(&x[i*nx],&f[i],nx,OShift,M,SS,1);
-			//f[i]+=2900.0;
+			f[i]+=2900.0;
 			break;
 		case 30:
 			cf08(&x[i*nx],&f[i],nx,OShift,M,SS,1);
-			//f[i]+=3000.0;
+			f[i]+=3000.0;
 			break;
 		default:
 			printf("\nError: There are only 30 test functions in this test suite!\n");
